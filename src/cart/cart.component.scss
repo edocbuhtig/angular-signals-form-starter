@@ -1,0 +1,24 @@
+.form-row {
+  display: grid;
+  gap: .375rem;
+  place-content: center;
+  height: 100dvh;
+}
+
+.form-row label {
+  font-size: .875rem;
+  color: var(--qs-muted, #64748b);
+}
+
+pre {
+  border: solid 1px red;
+  border-radius: 0.75rem;
+  color: var(--qs-muted, #64748b);
+  text-align: center;
+  margin-block: 1.5em;
+  padding: 0.5em;
+}
+
+.error {
+  color: red;
+}

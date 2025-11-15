@@ -1,0 +1,140 @@
+:host {
+  --qs-bg:             #ffffff;
+  --qs-fg:             #0f172a; /* slate-900 */
+  --qs-border:         #e2e8f0; /* slate-200 */
+  --qs-muted:          #64748b; /* slate-500 */
+  --qs-accent:         #2563eb; /* blue-600 */
+  --qs-accent-contrast:#ffffff;
+  --qs-shadow:         0 1px 2px rgba(0,0,0,.06), 0 1px 1px rgba(0,0,0,.04);
+  --qs-radius:         0.75rem;
+  --qs-pad:            0.5rem;
+  --qs-gap:            0.25rem;
+
+  /* density knobs */
+  --qs-height:         2.5rem;   /* comfortable: 40px */
+  --qs-btn-width:      2.5rem;
+  --qs-font-size:      0.95rem;
+  --qs-font-weight:    600;
+
+  color-scheme: light dark;
+}
+
+/* Auto dark theme */
+@media (prefers-color-scheme: dark) {
+  :host {
+    --qs-bg:           #0b1220;  /* near-slate-950 */
+    --qs-fg:           #e2e8f0;  /* slate-200 */
+    --qs-border:       #1f2937;  /* slate-800 */
+    --qs-muted:        #94a3b8;  /* slate-400 */
+    --qs-accent:       #60a5fa;  /* blue-400 */
+    --qs-accent-contrast:#0b1220;
+    --qs-shadow:       0 1px 2px rgba(0,0,0,.4), 0 1px 1px rgba(0,0,0,.25);
+  }
+}
+
+/* ===== Layout ===== */
+.stepper {
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: var(--qs-gap);
+  background: var(--qs-bg);
+  color: var(--qs-fg);
+  border: 1px solid var(--qs-border);
+  border-radius: var(--qs-radius);
+  box-shadow: var(--qs-shadow);
+  height: var(--qs-height);
+  padding: 0 var(--qs-pad);
+}
+
+/* ===== Buttons ===== */
+.btn {
+  all: unset; /* reset */
+  display: inline-grid;
+  place-items: center;
+  width: var(--qs-btn-width);
+  height: calc(var(--qs-height) - 8px);
+  border-radius: calc(var(--qs-radius) - 4px);
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.1rem;
+  font-weight: var(--qs-font-weight);
+  line-height: 1;
+  transition: transform .06s ease, background-color .15s ease, box-shadow .15s ease;
+  color: var(--qs-fg);
+}
+
+.btn:hover {
+  background: color-mix(in oklab, var(--qs-accent) 10%, transparent);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--qs-accent);
+  outline-offset: 2px;
+}
+
+/* Plus/Minus affordance */
+.btn-minus, .btn-plus {
+  border: 1px solid transparent;
+}
+.btn-minus:hover, .btn-plus:hover {
+  border-color: var(--qs-border);
+}
+
+/* ===== Quantity readout ===== */
+.qty {
+  min-width: 3ch;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--qs-font-size);
+  font-weight: var(--qs-font-weight);
+  padding: 0 .35rem;
+  border-radius: .5rem;
+  outline: none;
+}
+
+/* Make the number look “field-like” on focus for accessibility */
+.qty:focus-visible {
+  box-shadow: 0 0 0 2px var(--qs-accent);
+  background: color-mix(in oklab, var(--qs-accent) 12%, var(--qs-bg));
+}
+
+/* ===== Disabled state ===== */
+.is-disabled,
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}
+.btn:disabled:hover {
+  background: transparent;
+  border-color: transparent;
+}
+
+/* ===== Error text (optional) ===== */
+.field-error {
+  display: block;
+  margin-top: .35rem;
+  color: #dc2626; /* red-600 */
+  font-size: .8rem;
+}
+
+/* ===== Density variants (opt-in via host class) ===== */
+:host(.qs--compact) {
+  --qs-height:    2.125rem;
+  --qs-btn-width: 2.125rem;
+  --qs-font-size: 0.9rem;
+}
+:host(.qs--spacious) {
+  --qs-height:    3rem;
+  --qs-btn-width: 3rem;
+  --qs-font-size: 1rem;
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+}

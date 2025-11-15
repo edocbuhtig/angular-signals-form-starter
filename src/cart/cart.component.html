@@ -1,0 +1,10 @@
+<form class="cart-form" novalidate>
+  <div class="form-row">
+    <label for="qty">Quantity</label>
+    <app-quantity-stepper id="qty" [field]="cartForm.quantity" />
+    <pre>Form Value: {{ cartForm.quantity().value() }}</pre>
+    @if (cartForm.quantity().invalid()) {
+      <div class="error">Quantity must be at least 1</div>
+    }
+  </div>
+</form>

@@ -1,0 +1,21 @@
+@let disabled = isDisabled();
+<div class="stepper" [class.is-disabled]="disabled">
+  <button
+    type="button"
+    class="btn btn-minus"
+    (click)="decrement()"
+    [disabled]="disabled"
+    aria-label="Decrease quantity">−</button>
+  <span
+    class="qty"
+    role="spinbutton"
+    [attr.aria-valuenow]="value()"
+    aria-valuemin="1"
+    tabindex="0">{{ value() }}</span>
+  <button
+    type="button"
+    class="btn btn-plus"
+    (click)="increment()"
+    [disabled]="disabled"
+    aria-label="Increase quantity">+</button>
+</div>
